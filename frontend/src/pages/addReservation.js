@@ -25,7 +25,7 @@ function AddReservation(props) {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/api/reservation', formData);
+            const response = await axios.post('http://localhost:3000/api/catways/:id/reservations', formData);
 
             if (response.status === 201) {
                 console.log('done')

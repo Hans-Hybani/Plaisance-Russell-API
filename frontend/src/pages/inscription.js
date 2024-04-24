@@ -3,6 +3,7 @@ import "../style/home_style.css"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'; 
+import { Link } from "react-router-dom";
 
 function Inscription(props) {
 
@@ -40,6 +41,9 @@ function Inscription(props) {
         <div>
             <section className="section__connexion">
                 <h2>Inscrivez-vous !</h2>
+                <Link to="/Home">
+                    Home
+                </Link>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Nom</Form.Label>

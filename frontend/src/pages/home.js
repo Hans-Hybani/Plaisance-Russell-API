@@ -8,7 +8,6 @@ function Home(params) {
 
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
-        const [isChecked, setIsChecked] = useState(false);
         const [errorMessage, setErrorMessage] = useState('');
     
         const handleEmailChange = (e) => {
@@ -19,9 +18,6 @@ function Home(params) {
             setPassword(e.target.value);
         };
     
-        const handleCheckboxChange = (e) => {
-            setIsChecked(e.target.checked);
-        };
     
         const handleSubmit = async (e) => {
             e.preventDefault();
@@ -35,7 +31,6 @@ function Home(params) {
                     body: JSON.stringify({
                         email: email,
                         password: password,
-                        isChecked: isChecked
                     })
                 });
     
@@ -74,14 +69,10 @@ function Home(params) {
                                                         <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                                                 </Form.Group>
 
-                                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                                        <Form.Check type="checkbox" label="Check me out" checked={isChecked} onChange={handleCheckboxChange} />
-                                                </Form.Group>
-
                                                 <Button variant="primary" type="submit">
                                                         Connexion
                                                 </Button>
-                                                <Link to="\Inscription">
+                                                <Link to="/Inscription">
                                                         Inscription
                                                 </Link>
 

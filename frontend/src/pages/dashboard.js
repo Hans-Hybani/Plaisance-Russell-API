@@ -74,14 +74,14 @@ function Dashboard(params) {
             }
         };
     
-        const deleteReservation = async (reservationId) => {
-            try {
-                await axios.delete(`http://localhost:3000/api/reservation/${reservationId}`);
-                fetchDataReservations();
-            } catch (error) {
-                console.error('Error deleting reservation:', error);
-            }
-        };
+        const deleteReservation = async (catwayId, reservationId) => {
+                try {
+                    await axios.delete(`http://localhost:3000/api/catway/${catwayId}/reservations/${reservationId}`);
+                    fetchDataReservations();
+                } catch (error) {
+                    console.error('Erreur lors de la suppression de la réservation:', error);
+                }
+            };
         
         return(
                 <div>
@@ -181,7 +181,7 @@ function Dashboard(params) {
                                                                 <td>{reservation.CheckIn}</td>
                                                                 <td>{reservation.CheckOut}</td>
                                                                 <td>
-                                                                        <button className="sup" onClick={() => deleteReservation(reservation._id)}>Supprimer</button>
+                                                                <button className="sup" onClick={() => deleteReservation(reservation.catwayId, reservation._id)}>Supprimer</button>
                                                                 </td>
                                                         </tr>
                                                         ))}

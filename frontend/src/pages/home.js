@@ -42,13 +42,10 @@ function Home(params) {
                 if (!response.ok) {
                     throw new Error('Failed to submit form');
                 }
-    
-                // const data = await response.json();
-                // console.log('done')
-                // console.log(data);
+
                 window.location.href = '/Dashboard';
             } catch (error) {
-                // Handle error
+           
                 console.error('Error submitting form:', error);
                 setErrorMessage('An error occurred. Please try again.');
             }

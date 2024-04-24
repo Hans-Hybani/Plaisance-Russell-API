@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import "../style/home_style.css"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios'; // Importer Axios
+import axios from 'axios'; 
 
 function Inscription(props) {
-    // Créer des états pour stocker les valeurs des champs du formulaire
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    // Fonction pour gérer la soumission du formulaire
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Empêcher le comportement par défaut du formulaire
+        e.preventDefault(); 
 
-        // Créer un objet contenant les données du formulaire
         const formData = {
             name: name,
             email: email,
@@ -23,15 +21,13 @@ function Inscription(props) {
         };
 
         try {
-            // Envoyer les données du formulaire à l'API avec Axios
             const response = await axios.post('http://localhost:3000/signup', formData);
 
-            // Vérifier si la requête a réussi
             if (response.status === 201) {
                 console.log('done')
                 window.location.href = '/Home';
             } else {
-                // Gérer la réponse de l'API en cas d'erreur
+
                 setErrorMessage('An error occurred. Please try again.');
                 console.error('Erreur lors de l\'inscription:', response.data.error);
             }

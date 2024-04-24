@@ -68,11 +68,12 @@ table{
 }
 
 .mod {
-  background-color: #007bff;
-  color: #fff;
+  background-color:burlywood;
+  color: black;
+  font-weight: bold;
   border: none;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .mod:hover {

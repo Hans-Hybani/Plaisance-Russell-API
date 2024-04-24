@@ -1,18 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../style/dashboard.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Dashboard(params) {
-        const data = [
-                { id: 1, nom: 'John Doe', email: 'john@example.com' },
-                { id: 2, nom: 'Jane Smith', email: 'jane@example.com' },
-                { id: 3, nom: 'Alice Johnson', email: 'alice@example.com' }
-              ];
+        // User
+        
+        const [users, setUsers] = useState([]);
+
+        useEffect(() => {
+                fetchData();
+            }, []);
+        
+        const fetchData = async () => {
+                try {
+                    const response = await axios.get('http://localhost:3000/api/users');
+                    setUsers(response.data);
+                } catch (error) {
+                    console.error('Error fetching users:', error);
+                }
+            };
+
+        const deleteUser = async (userId) => {
+                try {
+                    await axios.delete(`http://localhost:3000/api/user/${userId}`);
+                    // Rafraîchir la liste des utilisateurs après la suppression
+                    fetchData();
+                } catch (error) {
+                    console.error('Error deleting user:', error);
+                }
+            };
+
+        // Catway
+
+        const [catways, setCatways] = useState([]);
+
+        useEffect(() => {
+                fetchDataCatways();
+        }, []);
+
+        const fetchDataCatways = async () => {
+                try {
+                const response = await axios.get('http://localhost:3000/api/catways');
+                setCatways(response.data);
+                } catch (error) {
+                console.error('Error fetching catways:', error);
+                }
+        };
+
+        const deleteCatway = async (catwayId) => {
+                try {
+                await axios.delete(`http://localhost:3000/api/catway/${catwayId}`);
+                fetchDataCatways();
+                } catch (error) {
+                console.error('Error deleting catway:', error);
+                }
+        };
+
+        // Reservation
+
+        const [reservations, setReservations] = useState([]);
+
+        useEffect(() => {
+            fetchDataReservations();
+        }, []);
+    
+        const fetchDataReservations = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/reservations');
+                setReservations(response.data);
+            } catch (error) {
+                console.error('Error fetching reservations:', error);
+            }
+        };
+    
+        const deleteReservation = async (reservationId) => {
+            try {
+                await axios.delete(`http://localhost:3000/api/reservation/${reservationId}`);
+                fetchDataReservations();
+            } catch (error) {
+                console.error('Error deleting reservation:', error);
+            }
+        };
+        
         return(
                 <div>
                         <h1> TABLEAU DE BORD </h1>
                         <section className="add__user_dah">
-                                <Link to="/Inscription">
+                                <Link to="/AddUser">
                                         <button>Ajouter un utilisateur</button>
                                 </Link>
                         </section>
@@ -22,30 +97,31 @@ function Dashboard(params) {
                                         <table className="table">
                                                 <thead>
                                                         <tr>
-                                                        <th>name</th>
-                                                        <th>Email</th>
+                                                                <th>name</th>
+                                                                <th>Email</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
-                                                        {data.map(item => (
-                                                        <tr key={item.id}>
-                                                                <td>{item.nom}</td>
-                                                                <td>{item.email}</td>
+                                                        {users.map(user => (
+                                                        <tr key={user.id}>
+                                                                <td>{user.name}</td>
+                                                                <td>{user.email}</td>
                                                                 <td>
-                                                                        <button className="mod">Modifier</button>
+                                                                        <button className="sup"  onClick={() => deleteUser(user._id)}>Supprimer</button>
                                                                 </td>
-                                                                <td>
-                                                                        <button className="sup">Supprimer</button>
-                                                                 </td>
                                                         </tr>
                                                         ))}
                                                 </tbody>
                                         </table>
+
+                                        <Link to="/UpdateUser" className="upButton">
+                                                <button className="mod">Modifier un utilisateur</button>
+                                        </Link>
                         </section>
 
                         <section className="add__user_dah">
-                                <Link to="/Catway">
-                                        <button>Creer un catway</button>
+                                <Link to="/addUser">
+                                        <button>Creer un utilisateur</button>
                                 </Link>
                         </section>
 
@@ -54,28 +130,73 @@ function Dashboard(params) {
                                         <table className="table">
                                                 <thead>
                                                         <tr>
-                                                        <th>Cateway Number</th>
-                                                        <th>Type</th>
+                                                                <th>Cateway Number</th>
+                                                                <th>Cateway State</th>
+                                                                <th>Type</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
-                                                        {data.map(item => (
-                                                        <tr key={item.id}>
-                                                                <td>{item.nom}</td>
-                                                                <td>{item.email}</td>
+                                                        {catways.map(catway => (
+                                                        <tr key={catway.id}>
+                                                                <td>{catway.catwayNumber}</td>
+                                                                <td>{catway.catwayState}</td>
+                                                                <td>{catway.type}</td>
                                                                 <td>
-                                                                        <button className="mod">Modifier</button>
-                                                                </td>
-                                                                <td>
-                                                                        <button className="sup">Supprimer</button>
-                                                                </td>
-                                                                <td>
-                                                                        <button className="det">Details</button>
+                                                                        <button className="sup" onClick={() => deleteCatway(catway._id)}>Supprimer</button>
                                                                 </td>
                                                         </tr>
                                                         ))}
                                                 </tbody>
                                         </table>
+                                        
+                                        <Link to="/UpdateCatway">
+                                                <button className="mod">Modifier un catway</button>
+                                        </Link>
+                        </section>
+
+                        <section className="add__user_dah">
+                                <Link to="/addCatway">
+                                        <button>Creer un catway</button>
+                                </Link>
+                        </section>
+
+                        <section className="tab__section">
+                                <h2>Reservation</h2>
+                                        <table className="table">
+                                                <thead>
+                                                        <tr>
+                                                        <th>Cateway Number</th>
+                                                        <th>Client Name</th>
+                                                        <th>Boat Name</th>
+                                                        <th>CheckIn</th>
+                                                        <th>CheckOut</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        {reservations.map(reservation => (
+                                                        <tr key={reservation.id}>
+                                                                <td>{reservation.catwayNumber}</td>
+                                                                <td>{reservation.clientName}</td>
+                                                                <td>{reservation.boatName}</td>
+                                                                <td>{reservation.CheckIn}</td>
+                                                                <td>{reservation.CheckOut}</td>
+                                                                <td>
+                                                                        <button className="sup" onClick={() => deleteReservation(reservation._id)}>Supprimer</button>
+                                                                </td>
+                                                        </tr>
+                                                        ))}
+                                                </tbody>
+                                        </table>
+
+                                        <Link to="/UpdateReservation">
+                                                <button className="mod">Modifier une réservation</button>
+                                        </Link>
+                        </section>
+
+                        <section className="add__user_dah">
+                                <Link to="/addReservation">
+                                        <button>Creer une réservation</button>
+                                </Link>
                         </section>
 
                 </div>

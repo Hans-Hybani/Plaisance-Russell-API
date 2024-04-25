@@ -24,7 +24,7 @@ function UpdateCatway(props) {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/catways');
+            const response = await axios.get('https://api-port-plaisance-rusell.vercel.app/api/catways');
             setCatways(response.data);
         } catch (error) {
             console.error('Error fetching catways:', error);
@@ -38,7 +38,7 @@ function UpdateCatway(props) {
         }
 
         try {
-            await axios.put(`http://localhost:3000/api/catway/${selectedCatwayId}`, editedCatwayData);
+            await axios.put(`https://api-port-plaisance-rusell.vercel.app/api/catway/${selectedCatwayId}`, editedCatwayData);
             fetchData();
             setEditedCatwayData({ catwayNumber: '', catwayState: '', type: '' });
             setSelectedCatwayId('');

@@ -26,7 +26,7 @@ function UpdateUser(props) {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/users');
+            const response = await axios.get('https://api-port-plaisance-rusell.vercel.app/api/users');
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -40,12 +40,12 @@ function UpdateUser(props) {
         }
 
         try {
-            await axios.put(`http://localhost:3000/api/user/${selectedUserId}`, editedUserData);
+            await axios.put(`https://api-port-plaisance-rusell.vercel.app/api/user/${selectedUserId}`, editedUserData);
             fetchData();
             setEditedUserData({ name: '', email: '', password: '' });
             setSelectedUserId('');
             setSelectedUserMessage('');
-            window.location.href = '/Dashboard';
+            window.location.replace('/Dashboard');
         } catch (error) {
             console.error('Error updating user:', error);
         }

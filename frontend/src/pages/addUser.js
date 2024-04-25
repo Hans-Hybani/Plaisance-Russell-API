@@ -3,6 +3,7 @@ import "../style/home_style.css"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'; 
+import { Link } from "react-router-dom";
 
 function AddUser(props) {
 
@@ -21,7 +22,7 @@ function AddUser(props) {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/signup', formData);
+            const response = await axios.post('https://api-port-plaisance-rusell.vercel.app/signup', formData);
 
             if (response.status === 201) {
                 console.log('done')
@@ -64,6 +65,11 @@ function AddUser(props) {
 
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
                 </Form>
+            </section>
+            <section className="add__user_dah">
+                    <Link to="/Dashboard">
+                        <button>Dashboard</button>
+                    </Link>
             </section>
         </div>
     );

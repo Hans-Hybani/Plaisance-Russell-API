@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import "../style/home_style.css"
+import { Link } from "react-router-dom";
 
 function AddCatway(props) {
 
@@ -21,14 +22,15 @@ function AddCatway(props) {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/api/catway', formData);
+            const response = await axios.post('https://api-port-plaisance-rusell.vercel.app/api/catway', formData);
 
             if (response.status === 201) {
                 console.log('done')
                 window.location.href = '/Dashboard';
             } else {
                 setErrorMessage('An error occurred. Please try again.');
-                console.error('Erreur lors de l\'ajout du catway:', response.data.error);
+                console.error('Erreur lors de l\'ajout du catway:', response.data.error.message);
+                
             }
         } catch (error) {
             console.error('Erreur lors de la requête:', error);
@@ -65,6 +67,11 @@ function AddCatway(props) {
 
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
                 </Form>
+            </section>
+            <section className="add__user_dah">
+                    <Link to="/Dashboard">
+                        <button>Dashboard</button>
+                    </Link>
             </section>
         </div>
     );

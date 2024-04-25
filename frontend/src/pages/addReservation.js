@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'; 
 import "../style/home_style.css"
+import { Link } from "react-router-dom";
 
 function AddReservation(props) {
 
@@ -25,7 +26,7 @@ function AddReservation(props) {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/api/catways/:id/reservations', formData);
+            const response = await axios.post('https://api-port-plaisance-rusell.vercel.app/api/reservation', formData);
 
             if (response.status === 201) {
                 console.log('done')
@@ -75,6 +76,11 @@ function AddReservation(props) {
 
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
                 </Form>
+            </section>
+            <section className="add__user_dah">
+                    <Link to="/Dashboard">
+                        <button>Dashboard</button>
+                    </Link>
             </section>
         </div>
     );

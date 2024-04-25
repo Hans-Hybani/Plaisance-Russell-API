@@ -22,7 +22,7 @@ function Inscription(props) {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/signup', formData);
+            const response = await axios.post('https://api-port-plaisance-rusell.vercel.app/signup', formData);
 
             if (response.status === 201) {
                 console.log('done')

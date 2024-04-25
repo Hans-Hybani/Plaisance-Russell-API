@@ -14,7 +14,7 @@ function Dashboard(params) {
         
         const fetchData = async () => {
                 try {
-                    const response = await axios.get('http://localhost:3000/api/users');
+                    const response = await axios.get('https://api-port-plaisance-rusell.vercel.app/api/users');
                     setUsers(response.data);
                 } catch (error) {
                     console.error('Error fetching users:', error);
@@ -23,8 +23,7 @@ function Dashboard(params) {
 
         const deleteUser = async (userId) => {
                 try {
-                    await axios.delete(`http://localhost:3000/api/user/${userId}`);
-                    // Rafraîchir la liste des utilisateurs après la suppression
+                    await axios.delete(`https://api-port-plaisance-rusell.vercel.app/api/user/${userId}`);
                     fetchData();
                 } catch (error) {
                     console.error('Error deleting user:', error);
@@ -41,7 +40,7 @@ function Dashboard(params) {
 
         const fetchDataCatways = async () => {
                 try {
-                const response = await axios.get('http://localhost:3000/api/catways');
+                const response = await axios.get('https://api-port-plaisance-rusell.vercel.app/api/catways');
                 setCatways(response.data);
                 } catch (error) {
                 console.error('Error fetching catways:', error);
@@ -50,7 +49,7 @@ function Dashboard(params) {
 
         const deleteCatway = async (catwayId) => {
                 try {
-                await axios.delete(`http://localhost:3000/api/catway/${catwayId}`);
+                await axios.delete(`https://api-port-plaisance-rusell.vercel.app/api/catway/${catwayId}`);
                 fetchDataCatways();
                 } catch (error) {
                 console.error('Error deleting catway:', error);
@@ -67,7 +66,7 @@ function Dashboard(params) {
     
         const fetchDataReservations = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/reservations');
+                const response = await axios.get('https://api-port-plaisance-rusell.vercel.app/api/reservations');
                 setReservations(response.data);
             } catch (error) {
                 console.error('Error fetching reservations:', error);
@@ -76,7 +75,7 @@ function Dashboard(params) {
     
         const deleteReservation = async (catwayId, reservationId) => {
                 try {
-                    await axios.delete(`http://localhost:3000/api/catway/${catwayId}/reservations/${reservationId}`);
+                    await axios.delete(`https://api-port-plaisance-rusell.vercel.app/api/catway/${catwayId}/reservations/${reservationId}`);
                     fetchDataReservations();
                 } catch (error) {
                     console.error('Erreur lors de la suppression de la réservation:', error);
@@ -87,11 +86,10 @@ function Dashboard(params) {
                 <div>
                         <h1> TABLEAU DE BORD </h1>
                         <section className="add__user_dah">
-                                <Link to="/AddUser">
-                                        <button>Ajouter un utilisateur</button>
+                                <Link to="/Home">
+                                        <button>Déconnexion</button>
                                 </Link>
                         </section>
-
                         <section className="tab__section">
                                 <h2>Utilisateur</h2>
                                         <table className="table">
@@ -165,11 +163,11 @@ function Dashboard(params) {
                                         <table className="table">
                                                 <thead>
                                                         <tr>
-                                                        <th>Cateway Number</th>
-                                                        <th>Client Name</th>
-                                                        <th>Boat Name</th>
-                                                        <th>CheckIn</th>
-                                                        <th>CheckOut</th>
+                                                                <th>Cateway Number</th>
+                                                                <th>Client Name</th>
+                                                                <th>Boat Name</th>
+                                                                <th>CheckIn</th>
+                                                                <th>CheckOut</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
@@ -187,10 +185,6 @@ function Dashboard(params) {
                                                         ))}
                                                 </tbody>
                                         </table>
-
-                                        <Link to="/UpdateReservation">
-                                                <button className="mod">Modifier une réservation</button>
-                                        </Link>
                         </section>
 
                         <section className="add__user_dah">
